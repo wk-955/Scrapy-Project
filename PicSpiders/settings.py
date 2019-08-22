@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Scrapy settings for JDSpider project
+# Scrapy settings for PicSpiders project
 #
 # For simplicity, this file contains only settings considered important or
 # commonly used. You can find more settings consulting the documentation:
@@ -9,33 +9,33 @@
 #     https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://doc.scrapy.org/en/latest/topics/spider-middleware.html
 
-BOT_NAME = 'JDSpider'
+BOT_NAME = 'PicSpiders'
 
-SPIDER_MODULES = ['JDSpider.spiders']
-NEWSPIDER_MODULE = 'JDSpider.spiders'
-
-MAX_PAGE = 5
-KEYWORDS = '显卡'
-
-# Mongo数据库
-MONGODB_SERVER = "localhost"
-MONGODB_PORT = 27017
-MONGODB_DBNAME = "JD"
+SPIDER_MODULES = ['PicSpiders.spiders']
+NEWSPIDER_MODULE = 'PicSpiders.spiders'
 
 
-ITEM_PIPELINES = {
-   'JDSpider.pipelines.JDPipeline': 300,
+MAX_PAGE = 1
+KEYWORD = 'Beauty'
+ITEM_PIPELINES = {'PicSpiders.pipelines.ImagesPipelinse': 300}
+IMAGES_STORE = 'D:/Pic/'
+IMAGES_URLS_FIELD = 'img_urls'
+ROBOTSTXT_OBEY = False
+DEFAULT_REQUEST_HEADERS = {
+    'Referer': 'https://movie.douban.com/subject/2129389/all_photos',
+  'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.100 Safari/537.36',
 }
 
-DOWNLOADER_MIDDLEWARES = {
-   'JDSpider.middlewares.ProxyMiddleware': 543,
-}
+# IMAGES_EXPIRES = 90             # 过期天数
+# IMAGES_MIN_HEIGHT = 100         # 图片的最小高度
+# IMAGES_MIN_WIDTH = 100          # 图片的最小宽度
 
+# HTTPERROR_ALLOWED_CODES = [406]
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-#USER_AGENT = 'JDSpider (+http://www.yourdomain.com)'
+#USER_AGENT = 'PicSpiders (+http://www.yourdomain.com)'
 
 # Obey robots.txt rules
-ROBOTSTXT_OBEY = False
+
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 #CONCURRENT_REQUESTS = 32
@@ -55,19 +55,19 @@ ROBOTSTXT_OBEY = False
 #TELNETCONSOLE_ENABLED = False
 
 # Override the default request headers:
-DEFAULT_REQUEST_HEADERS = {
-  'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-  'Accept-Language': 'en',
-}
+
 
 # Enable or disable spider middlewares
 # See https://doc.scrapy.org/en/latest/topics/spider-middleware.html
 #SPIDER_MIDDLEWARES = {
-#    'JDSpider.middlewares.JdspiderSpiderMiddleware': 543,
+#    'PicSpiders.middlewares.PicspidersSpiderMiddleware': 543,
 #}
 
 # Enable or disable downloader middlewares
 # See https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
+#DOWNLOADER_MIDDLEWARES = {
+#    'PicSpiders.middlewares.PicspidersDownloaderMiddleware': 543,
+#}
 
 # Enable or disable extensions
 # See https://doc.scrapy.org/en/latest/topics/extensions.html
@@ -77,7 +77,9 @@ DEFAULT_REQUEST_HEADERS = {
 
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
-
+#ITEM_PIPELINES = {
+#    'PicSpiders.pipelines.PicspidersPipeline': 300,
+#}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://doc.scrapy.org/en/latest/topics/autothrottle.html

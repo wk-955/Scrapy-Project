@@ -4,14 +4,11 @@
 #
 # See documentation in:
 # https://doc.scrapy.org/en/latest/topics/spider-middleware.html
-import logging
 
 from scrapy import signals
-from scrapy import Request
-import requests
 
 
-class JdspiderSpiderMiddleware(object):
+class PicspidersSpiderMiddleware(object):
     # Not all methods need to be defined. If a method is not defined,
     # scrapy acts as if the spider middleware does not modify the
     # passed objects.
@@ -59,7 +56,7 @@ class JdspiderSpiderMiddleware(object):
         spider.logger.info('Spider opened: %s' % spider.name)
 
 
-class JdspiderDownloaderMiddleware(object):
+class PicspidersDownloaderMiddleware(object):
     # Not all methods need to be defined. If a method is not defined,
     # scrapy acts as if the downloader middleware does not modify the
     # passed objects.
@@ -104,11 +101,3 @@ class JdspiderDownloaderMiddleware(object):
 
     def spider_opened(self, spider):
         spider.logger.info('Spider opened: %s' % spider.name)
-
-
-class ProxyMiddleware(object):
-
-    def process_request(self, request, spider):
-        # 获取代理IP
-        ip = requests.get('http://192.168.80.118:5000/get/').text
-        request.meta['proxy'] = 'http://' + ip
